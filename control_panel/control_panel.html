@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css"> <!-- Custom CSS -->
+    <title>BMCC Companion</title>
+</head>
+
+<body>
+
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm">
+            <div class="header-left d-flex">
+                <div class="logo text-white" style="margin-right: 40px;">
+                    BMCC Companion
+                </div>
+                <a href="#" class="sidebarCollapse" data-toggle="collapse" aria-expanded="false">
+                    <span class="fas fa-bars text-white" style="font-size: 1.5em;"></span>
+                </a>
+            </div>
+            <ul class="navbar-item flex-row ml-auto" style="list-style: none; margin-left: auto; display: flex;">
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="fas fa-bell" style="font-size: 1.5em;"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="fas fa-envelope" style="font-size: 1.5em;"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i> <!-- Profile Icon -->
+                    </a>
+                </li>
+            </ul>
+        </header>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
+        <a href="#"><span class="fas fa-user-graduate"></span> Tutor AI</a>
+        <a href="#"><span class="fas fa-ban"></span> Spam Detector</a>
+        <a href="#"><span class="fas fa-upload"></span> Upload Files</a>
+    </div>
+
+    <!--Second Side bar-->
+    <!-- Second Sidebar -->
+    <!-- Dropdown Menu for Profile/Notifications -->
+    <div class="dropdown-menu" id="dropdown-menu">
+        <a href="#"><span class="fas fa-cog"></span> Settings</a>
+        <a href="#"><span class="fas fa-user"></span> Profile</a>
+        <a href="#"><span class="fas fa-sign-out-alt"></span> Logout</a>
+    </div>
+
+
+
+
+    <div class="main-content" id="main-content">
+        <div class="main-content" id="main-content">
+            <h2>Welcome to BMCC Companion</h2>
+            <p>Your dashboard for support and resources.</p>
+            <!-- College News Section -->
+            <div class="container mt-5" style="line-height: 70px;">
+                <h2>College News</h2>
+                <div class="news-section">
+                    <article class="news-item">
+                        <h4>News Article Title 1</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel odio euismod, fermentum
+                            odio vitae, auctor nulla. <a href="#">Read More</a></p>
+                    </article>
+                    <article class="news-item">
+                        <h4>News Article Title 2</h4>
+                        <p>Curabitur non arcu vitae elit laoreet ultricies. Sed at risus vitae libero bibendum commodo.
+                            <a href="#">Read More</a></p>
+                    </article>
+                    <article class="news-item">
+                        <h4>News Article Title 3</h4>
+                        <p>Sed hendrerit nisi sit amet libero commodo, in auctor massa feugiat. Vivamus sit amet ante ut
+                            quam pulvinar tincidunt. <a href="#">Read More</a></p>
+                    </article>
+                    <!-- Add more news articles as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".sidebarCollapse").click(function () {
+                $("#sidebar").toggleClass("show");
+                $("#main-content").toggleClass("shift");
+            });
+        });
+
+
+        //second side bar
+
+        document.querySelector(".fa-user-circle").addEventListener("click", function (event) {
+            event.stopPropagation();
+            document.getElementById("dropdown-menu").style.display = "block";
+        });
+        // Close the dropdown when clicking outside of it
+        document.addEventListener("click", function () {
+            document.getElementById("dropdown-menu").style.display = "none";
+        });
+    </script>
+</body>
+
+</html>

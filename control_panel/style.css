@@ -1,0 +1,122 @@
+/* Custom Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: hsl(200deg, 27%, 98%);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.header-container {
+    background: #0058A4;
+    /* Header color */
+    padding: 10px 15px;
+    z-index: 1000;
+    /* Keep it above sidebar */
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #383848;
+    /* Sidebar color */
+    position: fixed;
+    top: 0;
+    left: -250px;
+    /* Hidden by default */
+    transition: left 0.3s ease;
+    padding-top: 150px;
+    /* Space for header */
+    z-index: 999;
+    /* Keep it below header */
+}
+
+.sidebar.show {
+    left: 0;
+    /* Show sidebar */
+}
+
+.sidebar a {
+    padding: 25px;
+    height: 100px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.sidebar a:hover {
+    background: #0058A4;
+    /* Hover effect */
+}
+
+.main-content {
+    margin-top: 50px;
+    margin-left: 130px;
+    /* Adjust for sidebar */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.shift {
+    margin-left: 250;
+    /* Shift main content when sidebar is hidden */
+}
+
+
+
+/* */
+
+.control-box {
+    background-color: #f8f9fa;
+    /* Light background for cards */
+    border: 1px solid #dee2e6;
+    /* Subtle border */
+    border-radius: 0.5rem;
+    /* Rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.control-box:hover {
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+.card-title {
+    font-size: 1.25em;
+    /* Slightly larger title */
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1em;
+    /* Standard font size for text */
+}
+
+
+/*Second NavBar */
+.dropdown-menu {
+    width: 180px; /* Compact width */
+    background-color: #2c2c3e; /* Background color */
+    position: absolute;
+    top: 60px; /* Adjust based on your header height */
+    right: 20px; /* Position near the profile icon */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Drop shadow for depth */
+    z-index: 1001; /* High z-index to appear above content */
+    display: none; /* Hidden by default */
+    overflow: hidden;
+}
+
+.dropdown-menu a {
+    padding: 10px 15px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.dropdown-menu a:hover {
+    background: #af547d; /* Hover effect */
+}
