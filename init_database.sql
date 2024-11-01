@@ -75,5 +75,5 @@ VALUES
 
 INSERT INTO course_enrollment (user_id, course_id, enrollment_date) 
 VALUES 
-(@dummy_user_id, 2, NOW()),  -- CSC211
-(@dummy_user_id, 3, NOW());  -- CSC215
+(1, 2, NOW()),  -- CSC211
+(1, 3, NOW());  -- CSC215
