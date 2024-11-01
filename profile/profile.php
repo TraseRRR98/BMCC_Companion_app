@@ -137,7 +137,7 @@ $connection->close();
                 <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p class="card-text"><strong>GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
                 <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
-                <p class="card-text"><strong>Account Created:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
+                <p class="card-text"><strong>Major:</strong> <?php echo htmlspecialchars($user['major'] ?? 'N/A'); ?></p>
             </div>
         </div>
 
