@@ -17,12 +17,13 @@
     <div class="header-container fixed-top">
         <header class="header navbar navbar-expand-sm">
             <div class="header-left d-flex">
+                <a href="#" class="sidebarCollapse" data-toggle="collapse" aria-expanded="false" style="margin-right: 30px;">
+                    <span class="fas fa-bars text-white" style="font-size: 1.5em;"></span>
+                </a>
+
                 <div class="logo text-white" style="margin-right: 40px;">
                     BMCC Companion
                 </div>
-                <a href="#" class="sidebarCollapse" data-toggle="collapse" aria-expanded="false">
-                    <span class="fas fa-bars text-white" style="font-size: 1.5em;"></span>
-                </a>
             </div>
             <ul class="navbar-item flex-row ml-auto" style="list-style: none; margin-left: auto; display: flex;">
                 <li class="nav-item">
@@ -63,75 +64,90 @@
     <!-- Second Sidebar -->
     <!-- Dropdown Menu for Profile/Notifications -->
     <!-- Dropdown Menu for Notifications -->
-    <div class="dropdown-menu" id="notification-menu" style="width: 300px;">
-        <div class="dropdown-header">Notifications</div>
-        <a href="#" class="dropdown-item">
-            <i class="fas fa-exclamation-circle"></i> New assignment due tomorrow
-        </a>
-        <a href="#" class="dropdown-item">
-            <i class="fas fa-calendar-alt"></i> Upcoming event: Workshop at 3 PM
-        </a>
-        <a href="#" class="dropdown-item">
-            <i class="fas fa-info-circle"></i> Campus safety alert issued
-        </a>
-        <a href="#" class="dropdown-item text-center" style="font-weight: bold;">
-            View All Notifications
-        </a>
-    </div>
+<div class="dropdown-menu" id="notification-menu" style="width: 300px;">
+    <div class="dropdown-header">Notifications</div>
+    <a href="#" class="dropdown-item">
+        <i class="fas fa-exclamation-circle"></i> New assignment due tomorrow
+    </a>
+    <a href="#" class="dropdown-item">
+        <i class="fas fa-calendar-alt"></i> Upcoming event: Workshop at 3 PM
+    </a>
+    <a href="#" class="dropdown-item">
+        <i class="fas fa-info-circle"></i> Campus safety alert issued
+    </a>
+    <a href="#" class="dropdown-item text-center" style="font-weight: bold;">
+        View All Notifications
+    </a>
+</div>
 
-    <!-- Dropdown Menu for Email -->
-    <div class="dropdown-menu" id="email-menu" style="width: 400px;">
-        <div class="dropdown-header">Messages</div>
-        <a href="#" class="dropdown-item">
-            <strong>Professor Smith:</strong> Remember to review...
-            <span class="text-muted">10 mins ago</span>
-        </a>
-        <a href="#" class="dropdown-item">
-            <strong>Career Services:</strong> Upcoming internship fair...
-            <span class="text-muted">1 hr ago</span>
-        </a>
-        <a href="#" class="dropdown-item">
-            <strong>BMCC Alerts:</strong> Important campus update...
-            <span class="text-muted">2 hrs ago</span>
-        </a>
-        <a href="#" class="dropdown-item text-center" style="font-weight: bold;">
-            View All Messages
-        </a>
-    </div>
-
-
+<!-- Dropdown Menu for Email -->
+<div class="dropdown-menu" id="email-menu"  style="width: 400px;">
+    <div class="dropdown-header">Messages</div>
+    <a href="#" class="dropdown-item">
+        <strong>Professor Smith:</strong> Remember to review...
+        <span class="text-muted">10 mins ago</span>
+    </a>
+    <a href="#" class="dropdown-item">
+        <strong>Career Services:</strong> Upcoming internship fair...
+        <span class="text-muted">1 hr ago</span>
+    </a>
+    <a href="#" class="dropdown-item">
+        <strong>BMCC Alerts:</strong> Important campus update...
+        <span class="text-muted">2 hrs ago</span>
+    </a>
+    <a href="#" class="dropdown-item text-center" style="font-weight: bold;">
+        View All Messages
+    </a>
+</div>
 
 
 
-    <div class="main-content" id="main-content" style="text-align: left;">
-        <div class="main-content" id="main-content">
-            <h2>Welcome to BMCC Companion</h2>
-            <p>Your dashboard for support and resources.</p>
-            <!-- College News Section -->
-            <div class="container mt-5" style="line-height: 70px;">
-                <h2>College News</h2>
+
+
+<div class="main-content" id="main-content" style="text-align: left; margin-top: 100px;">
+    <h2>Welcome to BMCC Companion</h2>
+    <p>Your dashboard for support and resources.</p>
+    
+    <!-- College News Section -->
+    <div class="container mt-5" style="margin-left: 130px;">
+        <h2>College News</h2>
+        <div class="row">
+            <div class="col-12">
                 <div class="news-section">
-                    <article class="news-item">
-                        <h4>News Article Title 1</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel odio euismod, fermentum
-                            odio vitae, auctor nulla. <a href="#">Read More</a></p>
+                    <article class="news-item card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">News Article Title 1</h4>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel odio euismod, 
+                                fermentum odio vitae, auctor nulla. <a href="#">Read More</a>
+                            </p>
+                        </div>
                     </article>
-                    <article class="news-item">
-                        <h4>News Article Title 2</h4>
-                        <p>Curabitur non arcu vitae elit laoreet ultricies. Sed at risus vitae libero bibendum commodo.
-                            <a href="#">Read More</a>
-                        </p>
+                    <article class="news-item card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">News Article Title 2</h4>
+                            <p class="card-text">
+                                Curabitur non arcu vitae elit laoreet ultricies. Sed at risus vitae libero bibendum 
+                                commodo. <a href="#">Read More</a>
+                            </p>
+                        </div>
                     </article>
-                    <article class="news-item">
-                        <h4>News Article Title 3</h4>
-                        <p>Sed hendrerit nisi sit amet libero commodo, in auctor massa feugiat. Vivamus sit amet ante ut
-                            quam pulvinar tincidunt. <a href="#">Read More</a></p>
+                    <article class="news-item card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">News Article Title 3</h4>
+                            <p class="card-text">
+                                Sed hendrerit nisi sit amet libero commodo, in auctor massa feugiat. Vivamus sit 
+                                amet ante ut quam pulvinar tincidunt. <a href="#">Read More</a>
+                            </p>
+                        </div>
                     </article>
                     <!-- Add more news articles as needed -->
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
@@ -147,35 +163,35 @@
         //second side bar
 
         // Toggle dropdown for Profile icon
-        document.querySelector(".fa-user-circle").addEventListener("click", function (event) {
-            event.stopPropagation();
-            document.getElementById("dropdown-menu").style.display = "block";
-        });
+document.querySelector(".fa-user-circle").addEventListener("click", function(event) {
+    event.stopPropagation();
+    document.getElementById("dropdown-menu").style.display = "block";
+});
 
-        // Toggle dropdown for Notification icon
-        document.querySelector(".fa-bell").addEventListener("click", function (event) {
-            event.stopPropagation();
-            // Close any open dropdowns first
-            document.getElementById("email-menu").style.display = "none"; // Close email menu if open
-            const notificationMenu = document.getElementById("notification-menu");
-            notificationMenu.style.display = (notificationMenu.style.display === "block") ? "none" : "block";
-        });
+// Toggle dropdown for Notification icon
+document.querySelector(".fa-bell").addEventListener("click", function(event) {
+    event.stopPropagation();
+    // Close any open dropdowns first
+    document.getElementById("email-menu").style.display = "none"; // Close email menu if open
+    const notificationMenu = document.getElementById("notification-menu");
+    notificationMenu.style.display = (notificationMenu.style.display === "block") ? "none" : "block";
+});
 
-        // Toggle dropdown for Email icon
-        document.querySelector(".fa-envelope").addEventListener("click", function (event) {
-            event.stopPropagation();
-            // Close any open dropdowns first
-            document.getElementById("notification-menu").style.display = "none"; // Close notification menu if open
-            const emailMenu = document.getElementById("email-menu");
-            emailMenu.style.display = (emailMenu.style.display === "block") ? "none" : "block";
-        });
+// Toggle dropdown for Email icon
+document.querySelector(".fa-envelope").addEventListener("click", function(event) {
+    event.stopPropagation();
+    // Close any open dropdowns first
+    document.getElementById("notification-menu").style.display = "none"; // Close notification menu if open
+    const emailMenu = document.getElementById("email-menu");
+    emailMenu.style.display = (emailMenu.style.display === "block") ? "none" : "block";
+});
 
-        // Close all dropdowns when clicking outside
-        document.addEventListener("click", function () {
-            document.getElementById("dropdown-menu").style.display = "none";
-            document.getElementById("notification-menu").style.display = "none";
-            document.getElementById("email-menu").style.display = "none";
-        });
+// Close all dropdowns when clicking outside
+document.addEventListener("click", function() {
+    document.getElementById("dropdown-menu").style.display = "none";
+    document.getElementById("notification-menu").style.display = "none";
+    document.getElementById("email-menu").style.display = "none";
+});
 
 
 

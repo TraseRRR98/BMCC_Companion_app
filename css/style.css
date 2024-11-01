@@ -49,9 +49,10 @@ body {
     /* Hover effect */
 }
 
+/* Main Content */
 .main-content {
     margin-top: 50px;
-    margin-left: 130px;
+    margin-left: 260px;
     /* Adjust for sidebar */
     padding: 20px;
     transition: margin-left 0.3s ease;
@@ -61,6 +62,36 @@ body {
     margin-left: 0;
     /* Shift main content when sidebar is hidden */
 }
+
+.card {
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.card-title {
+    font-size: 1.5em; /* Adjust title size */
+}
+
+.card-text {
+    font-size: 1em; /* Adjust text size */
+}
+
+
+.news-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+}
+
+.news-item:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+.news-item:active {
+    transform: scale(0.98); /* Slightly shrink when clicked */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lighter shadow when clicked */
+}
+
 
 
 
