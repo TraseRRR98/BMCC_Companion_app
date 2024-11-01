@@ -26,6 +26,28 @@ if ($result->num_rows == 1) {
 }
 
 $stmt->close();
+
+// Fetch course counts for online vs in-person specific to the logged-in user
+$courseCountQuery = "
+    SELECT courses.online, COUNT(*) as count 
+    FROM courses 
+    JOIN course_enrollment ON courses.course_id = course_enrollment.course_id 
+    WHERE course_enrollment.user_id = ? 
+    GROUP BY courses.online";
+$stmt = $connection->prepare($courseCountQuery);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$courseCountResult = $stmt->get_result();
+
+$courseCounts = ['online' => 0, 'in_person' => 0];
+while ($row = $courseCountResult->fetch_assoc()) {
+    if ($row['online'] == 1) {
+        $courseCounts['online'] = (int)$row['count'];
+    } else {
+        $courseCounts['in_person'] = (int)$row['count'];
+    }
+}
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +61,7 @@ $stmt->close();
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css"> <!-- Custom CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>BMCC Companion - User Profile</title>
 </head>
 
@@ -77,6 +100,7 @@ $stmt->close();
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+        <a href = "../control_panel/control_panel.html"><span class="fas fa-tachometer-alt"></span> Dashboard</a>
         <a href="#"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
         <a href="#"><span class="fas fa-user-graduate"></span> Tutor AI</a>
         <a href="#"><span class="fas fa-ban"></span> Spam Detector</a>
@@ -92,7 +116,7 @@ $stmt->close();
 
     <!-- User Profile Content -->
     <div class="container mt-5 pt-5">
-        <h2>User Profile</h2>
+        <h2 class="mt-3">User Profile</h2>
         <div class="card mt-4">
             <div class="card-body">
                 <h5 class="card-title"><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></h5>
@@ -100,9 +124,15 @@ $stmt->close();
                 <p class="card-text"><strong>GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
                 <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
                 <p class="card-text"><strong>Account Created:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
-                <a href="../lib/logout.php" class="btn btn-secondary mt-3">Logout</a>
             </div>
         </div>
+
+        <!-- Donut Chart for Course Format Distribution -->
+        <div class="container mt-5">
+            <h4>Course Format Distribution</h4>
+            <canvas id="courseChart" class="small-chart"></canvas>
+        </div>
+
     </div>
 
     <script src="../js/jquery.min.js"></script>
@@ -123,6 +153,39 @@ $stmt->close();
         document.addEventListener("click", function () {
             document.getElementById("dropdown-menu").style.display = "none";
         });
+
+        // Data for the chart from PHP
+        const courseCounts = <?php echo json_encode($courseCounts); ?>;
+
+        // Create the donut chart
+        const ctx = document.getElementById('courseChart').getContext('2d');
+        const courseChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Online', 'In-Person'],
+            datasets: [{
+                data: [courseCounts.online, courseCounts.in_person],
+                backgroundColor: ['#36A2EB', '#FF6384'],
+                hoverBackgroundColor: ['#36A2EB', '#FF6384']
+            }]
+        },
+        options: {
+            responsive: false,  // Disable responsiveness
+            maintainAspectRatio: true, // Maintain aspect ratio
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
     </script>
 </body>
 

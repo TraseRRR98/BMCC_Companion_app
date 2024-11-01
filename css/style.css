@@ -151,3 +151,9 @@ body {
 .dropdown-menu a:hover {
     background: #af547d; /* Hover effect */
 }
+
+.small-chart {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto; /* Center the chart */
+}
