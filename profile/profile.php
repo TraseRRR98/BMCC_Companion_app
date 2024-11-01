@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Fetch user information
-$sql = "SELECT first_name, last_name, email, gpa, role, created_at FROM users WHERE user_id = ?";
+$sql = "SELECT first_name, last_name, email, gpa, major, role, created_at FROM users WHERE user_id = ?";
 $stmt = $connection->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -48,11 +48,25 @@ while ($row = $courseCountResult->fetch_assoc()) {
     }
 }
 $stmt->close();
+
+// Fetch enrolled courses for the user
+$enrolledCoursesQuery = "
+    SELECT courses.course_name, courses.course_code, courses.instructor_name, courses.semester 
+    FROM courses 
+    JOIN course_enrollment ON courses.course_id = course_enrollment.course_id 
+    WHERE course_enrollment.user_id = ?";
+$stmt = $connection->prepare($enrolledCoursesQuery);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$enrolledCoursesResult = $stmt->get_result();
+$enrolledCourses = $enrolledCoursesResult->fetch_all(MYSQLI_ASSOC);
+
+$stmt->close();
+$connection->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -123,7 +137,7 @@ $stmt->close();
                 <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p class="card-text"><strong>GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
                 <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
-                <p class="card-text"><strong>Account Created:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
+                <p class="card-text"><strong>Major:</strong> <?php echo htmlspecialchars($user['major'] ?? 'N/A'); ?></p>
             </div>
         </div>
 
@@ -132,6 +146,33 @@ $stmt->close();
             <h4>Course Format Distribution</h4>
             <canvas id="courseChart" class="small-chart"></canvas>
         </div>
+
+        <!-- Enrolled Courses Table -->
+        <h3 class="mt-5">Enrolled Courses</h3>
+        <?php if (count($enrolledCourses) > 0): ?>
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Instructor</th>
+                        <th>Semester</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($enrolledCourses as $course): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($course['course_name']); ?></td>
+                            <td><?php echo htmlspecialchars($course['course_code']); ?></td>
+                            <td><?php echo htmlspecialchars($course['instructor_name']); ?></td>
+                            <td><?php echo htmlspecialchars($course['semester']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p class="mt-3">You are not enrolled in any courses.</p>
+        <?php endif; ?>
 
     </div>
 
@@ -160,37 +201,32 @@ $stmt->close();
         // Create the donut chart
         const ctx = document.getElementById('courseChart').getContext('2d');
         const courseChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Online', 'In-Person'],
-            datasets: [{
-                data: [courseCounts.online, courseCounts.in_person],
-                backgroundColor: ['#36A2EB', '#FF6384'],
-                hoverBackgroundColor: ['#36A2EB', '#FF6384']
-            }]
-        },
-        options: {
-            responsive: false,  // Disable responsiveness
-            maintainAspectRatio: true, // Maintain aspect ratio
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw;
+            type: 'doughnut',
+            data: {
+                labels: ['Online', 'In-Person'],
+                datasets: [{
+                    data: [courseCounts.online, courseCounts.in_person],
+                    backgroundColor: ['#36A2EB', '#FF6384'],
+                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                }]
+            },
+            options: {
+                responsive: false,  // Disable responsiveness
+                maintainAspectRatio: true, // Maintain aspect ratio
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
                         }
                     }
                 }
             }
-        }
-    });
+        });
     </script>
 </body>
-
 </html>
-
-<?php
-$connection->close();
-?>
