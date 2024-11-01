@@ -1,6 +1,7 @@
 -- Database Creation Script for BMCC Student Companion Project
 
 -- Create the database
+DROP DATABASE IF EXISTS bmcc_student_companion;
 CREATE DATABASE bmcc_student_companion;
 USE bmcc_student_companion;
 
@@ -12,6 +13,7 @@ CREATE TABLE courses (
     instructor_name VARCHAR(255),
     semester VARCHAR(50),
     description TEXT,
+    online TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -1,15 +1,12 @@
 <?php
 
 require_once "../lib/db_connect.php";
-require_once "../lib/accessors.php";
-require_once "../lib/user_login_tools.php";
 
 function navbar_generator($elements)
 {
-    $html = '
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    $html = '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">EIW</a>
+            <a class="navbar-brand" href="#">BMCC Companion</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,17 +14,17 @@ function navbar_generator($elements)
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">';
     
     foreach ($elements as $element) {
-        $html .= '<li class="nav-item active">';
+        $html .= '<li class="nav-item">';
         $html .= '<a class="nav-link" href="' . $element[1] . '">' . $element[0] . '</a>';
         $html .= '</li>';
     }
 
-    $html .= '
-                </ul>
+    $html .= '</ul>
             </div>
         </div>
-    </nav>
-    <script>
+    </nav>';
+
+    $html .= '<script>
         function inIframe() {
             try {
                 return window.self !== window.top;
@@ -37,7 +34,9 @@ function navbar_generator($elements)
         }
         function remove_navbar() {
             let navbar = document.getElementById("navbar");
-            navbar.remove();
+            if (navbar) {
+                navbar.remove();
+            }
         }
         if (inIframe()) {
             remove_navbar();
@@ -51,11 +50,7 @@ function generate_general_navbar()
 {
     $elements = [
         ['Home', '../generic/index.php'],
-        ['Question Management', '../administrator/list_questions.php'],
-        ['Template Management', '../quizzes/list_quiz_templates.php'],
-        ['Module Management','../module/list_modules.php'],
-        ['Take Quiz', '../quizzes/start_quiz.php'],
-        ['Analytics', '../analysis/dashboard.php'],  
+        ['File Uploader', '../files_uploader/uploader.php'],
         ['Login', '../generic/login.php'],  
         ['Logout', '../generic/logout.php'],  
     ];
@@ -79,8 +74,6 @@ function learner_navbar()
         ['Home', '../generic/index.php'],
         ['Join class', '../classes/join_class.php'],
         ['Logout', '../generic/logout.php']
-       
-        
     ];
 
     return navbar_generator($learner_elements);
@@ -95,7 +88,6 @@ function educator_navbar()
         ['Module Management','../module/list_modules.php'],
         ['Class Management', '../classes/list_classes.php'],
         ['Logout', '../generic/logout.php']
-        
     ];
 
     return navbar_generator($educator_navbar);
@@ -103,14 +95,7 @@ function educator_navbar()
 
 function generate_navbar()
 {
-    if(!is_logged_in())
-        return generic_navbar();
-
-    if(is_learner())
-        return learner_navbar();
-
-    if(is_educator())
-        return educator_navbar();
+    return generate_general_navbar();
 }
 
 echo generate_navbar();
