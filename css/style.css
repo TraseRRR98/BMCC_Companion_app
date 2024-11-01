@@ -58,7 +58,7 @@ body {
 }
 
 .main-content.shift {
-    margin-left: 250;
+    margin-left: 0;
     /* Shift main content when sidebar is hidden */
 }
 
