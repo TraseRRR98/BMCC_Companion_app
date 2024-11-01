@@ -55,19 +55,19 @@ function getBotResponse(userInput) {
     // Convert input to lowercase for case-insensitive matching
     const input = userInput.toLowerCase();
 
-    // Check for keywords to provide specific responses
-    if (input.includes("study for advanced programming techniques")) {
-        return "To study for Advanced Programming Techniques, try breaking down each concept into manageable sections. Practice coding daily, review class materials, and focus on hands-on exercises to solidify your understanding. Group study sessions can also help reinforce concepts.";
-    } else if (input.includes("resources for learning algorithms")) {
-        return "For learning algorithms, check out resources like 'Introduction to Algorithms' by Cormen et al., online tutorials like GeeksforGeeks and LeetCode, and YouTube channels like Computerphile. Practice solving algorithm problems daily to build confidence.";
-    } else if (input.includes("explain object-oriented programming principles")) {
-        return "Sure! Object-Oriented Programming (OOP) focuses on organizing code around objects and classes. The main principles are encapsulation, inheritance, polymorphism, and abstraction. Each helps manage complexity by structuring programs into reusable, modular code blocks.";
-    } else if (input.includes("improve my debugging skills")) {
-        return "Improving debugging skills takes practice. Start by understanding error messages, use print statements to check values, and practice with a debugger tool. Try to isolate issues and tackle them systematically, and consider reviewing your code logic with a peer or tutor.";
-    } else if (input.includes("prepare for programming exams")) {
-        return "To prepare for programming exams, review your notes and focus on coding exercises relevant to the course. Practice coding without looking at solutions, simulate exam conditions, and try to understand the logic behind each solution. Reviewing past exams can also be beneficial.";
+    // Check for mental health-related prompts and responses
+    if (input.includes("how are you feeling mentally")) {
+        return "It's great that you're checking in with yourself. I'm here to support you. How are you feeling today?";
+    } else if (input.includes("i feel stressed")) {
+        return "I'm sorry to hear that you're feeling stressed. Taking a few deep breaths or practicing mindfulness exercises can sometimes help. Would you like some tips on relaxation techniques?";
+    } else if (input.includes("i feel anxious")) {
+        return "Anxiety can be challenging. Try grounding techniques like focusing on your breathing or engaging your senses. Remember, I'm here for you if you want to talk about it.";
+    } else if (input.includes("i feel overwhelmed")) {
+        return "It sounds like there's a lot on your mind. Breaking tasks down into smaller steps can make things feel more manageable. I'm here to help however I can.";
+    } else if (input.includes("i feel sad")) {
+        return "I'm sorry that you're feeling sad. Sometimes, talking to someone or even writing down your feelings can help. Let me know if there’s anything specific you'd like to discuss.";
     } else {
         // Default response if no keywords match
-        return "I'm here to help! Can you please clarify your question about CSC 211 or programming?";
+        return "I'm here to listen and support you. How are you feeling, and what can I help you with today?";
     }
 }
