@@ -1,7 +1,6 @@
 <?php
-require '../lib/db_connect.php';
-include '../lib/css.php';
-include('../lib/navbar.php');
+require 'lib/db_connect.php';
+include 'lib/css.php';
 
 // Fetch courses from the database
 $courses_result = $conn->query("SELECT course_id, course_name FROM courses");
