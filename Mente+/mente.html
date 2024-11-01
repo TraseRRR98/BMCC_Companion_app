@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente+ - Your AI-Powered Mental Health Companion</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Mente+</h1>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+                <a href="#resources">Resources</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Mente+</h2>
+            <p>Your AI-Powered Mental Health Support Companion</p>
+        </div>
+    </section>
+
+    <!-- Centered Chatbot Window Section -->
+    <section class="chatbot-section">
+        <div id="chatbot-window">
+            <div id="chatbot-header">
+                <span>Mente+ Chatbot</span>
+                <button onclick="toggleChat()">✖</button>
+            </div>
+            <div id="chatbox">
+                <!-- Messages will appear here -->
+            </div>
+            <form id="chatForm" onsubmit="return sendMessage()">
+                <input type="text" id="userInput" name="userInput" placeholder="Type your message..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h3>About Mente+</h3>
+        <p>Mente+ is here to provide compassionate, confidential, and convenient mental health support anytime you need it.</p>
+        <p>Our mission is to make mental health support accessible, personalized, and stigma-free for all students.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h3>Features</h3>
+        <ul>
+            <li><strong>Real-Time Emotional Support</strong>: Mente+ listens and responds to you with empathy.</li>
+            <li><strong>Guided Exercises</strong>: Access mindfulness practices, stress management techniques, and more.</li>
+            <li><strong>Resource Recommendations</strong>: Connects you to BMCC counseling services and wellness resources.</li>
+            <li><strong>Mood Tracking</strong>: Monitor your emotions over time and gain insights into your mental well-being.</li>
+        </ul>
+        <a href="features.html" class="feature-link">Learn More About Our Features</a>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="#">On-Campus Counseling</a></li>
+            <li><a href="#">24/7 Crisis Helpline</a></li>
+            <li><a href="#">Mental Health Workshops</a></li>
+            <li><a href="#">Self-Help Library</a></li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>Contact us: <a href="mailto:contact@menteplus.com">contact@menteplus.com</a></p>
+        <p>&copy; 2024 Mente+ | All rights reserved.</p>
+    </footer>
+
+    <script src="mente.js"></script>
+</body>
+</html>
+
