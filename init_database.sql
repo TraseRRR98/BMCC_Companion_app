@@ -35,6 +35,7 @@ CREATE TABLE users (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
+    gpa DECIMAL(3, 2) DEFAULT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('student', 'instructor', 'admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -67,3 +68,12 @@ INSERT INTO `courses` (`course_id`, `course_name`, `course_code`, `instructor_na
 (3, 'Fundamentals of Computer Systems', 'CSC215', 'Yan Chen', 'Fall 2024', 'This course covers the fundamentals of computer organization and digital logic. Topics include number systems and codes, Boolean algebra, digital circuits, combinational logic design principles, sequential logic design principles, functional components of computer systems, hardware description language, and assembly language. Students will use computer aided design (CAD) tools for digital logic design, analysis and simulation.', '2024-11-01 19:43:49'),
 (4, 'Discrete Structures and Applications to Computer Science', 'CSC331', 'Jose Ramon Santos', 'Fall 2024', 'This course will introduce students to linear and non-linear data structures, their use and implementation, algorithms, and software engineering techniques. Topics will include: stacks, queues, lined lists, has tables, trees, graphs, searching and sorting techniques. Asymptotic analysis of algorithms and data structures will also be discussed.', '2024-11-01 19:43:49'),
 (5, 'Software Development', 'CSC350', 'Maryam Vatankhah', 'Fall 2024', 'This course covers the fundamentals of software development, including software development life cycle, object-oriented paradigm, design patterns and event-driven programming working in teams. The students are required to develop software applications with graphic user interfaces and databases.', '2024-11-01 19:43:49');
+
+INSERT INTO users (first_name, last_name, email, password, role, gpa, created_at) 
+VALUES 
+('John', 'Doe', 'johndoe@example.com', 'hashed_password', 'student', 3.5, '2024-11-01 19:43:49');
+
+INSERT INTO course_enrollment (user_id, course_id, enrollment_date) 
+VALUES 
+(@dummy_user_id, 2, NOW()),  -- CSC211
+(@dummy_user_id, 3, NOW());  -- CSC215
