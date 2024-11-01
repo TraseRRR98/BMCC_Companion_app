@@ -10,25 +10,31 @@ if (isset($_SESSION['logout_message'])) {
 }
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    // Check if the email exists in the database
-    $sql = "SELECT user_id FROM users WHERE email = ?";
+    // Check if the email exists in the database and retrieve the plaintext password
+    $sql = "SELECT user_id, password FROM users WHERE email = ?";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        // Set the user ID in session
         $user = $result->fetch_assoc();
-        $_SESSION['user_id'] = $user['user_id'];
 
-        // Redirect to the original page or profile page if none is provided
-        $redirect_url = isset($_GET['redirect']) ? $_GET['redirect'] : 'profile.php';
-        header("Location: " . $redirect_url);
-        exit;
+        // Plaintext password check
+        if ($password === $user['password']) {
+            // Password is correct, set the user ID in session
+            $_SESSION['user_id'] = $user['user_id'];
+
+            // Redirect to control panel
+            header("Location: ../control_panel/control_panel.html");
+            exit;
+        } else {
+            $error = "Invalid password.";
+        }
     } else {
         $error = "Invalid email address.";
     }
@@ -60,8 +66,12 @@ $connection->close();
 
         <form method="POST" action="">
             <div class="mb-3">
-                <label for="email" class="form-label">Enter Email Address:</label>
+                <label for="email" class="form-label">Email Address:</label>
                 <input type="email" name="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" name="password" id="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Log In</button>
         </form>

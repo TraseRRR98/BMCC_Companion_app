@@ -1,10 +1,10 @@
 <?php
 session_start();
-include '../lib/db_connect.php';
+require_once '../lib/db_connect.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php?redirect=" . urlencode($_SERVER['PHP_SELF']));
+    header("Location: ../lib/login.php?redirect=" . urlencode($_SERVER['PHP_SELF']));
     exit;
 }
 
@@ -87,7 +87,7 @@ $stmt->close();
     <div class="dropdown-menu" id="dropdown-menu">
         <a href="#"><span class="fas fa-cog"></span> Settings</a>
         <a href="#"><span class="fas fa-user"></span> Profile</a>
-        <a href="logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
+        <a href="../lib/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
     </div>
 
     <!-- User Profile Content -->
@@ -100,7 +100,7 @@ $stmt->close();
                 <p class="card-text"><strong>GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
                 <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
                 <p class="card-text"><strong>Account Created:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
-                <a href="logout.php" class="btn btn-secondary mt-3">Logout</a>
+                <a href="../lib/logout.php" class="btn btn-secondary mt-3">Logout</a>
             </div>
         </div>
     </div>
