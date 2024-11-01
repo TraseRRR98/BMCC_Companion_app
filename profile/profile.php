@@ -1,3 +1,33 @@
+<?php
+session_start();
+include '../lib/db_connect.php';
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php?redirect=" . urlencode($_SERVER['PHP_SELF']));
+    exit;
+}
+
+// Get the logged-in user's ID
+$user_id = $_SESSION['user_id'];
+
+// Fetch user information
+$sql = "SELECT first_name, last_name, email, gpa, role, created_at FROM users WHERE user_id = ?";
+$stmt = $connection->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows == 1) {
+    $user = $result->fetch_assoc();
+} else {
+    echo "User not found.";
+    exit;
+}
+
+$stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +39,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css"> <!-- Custom CSS -->
-    <title>BMCC Companion</title>
+    <title>BMCC Companion - User Profile</title>
 </head>
 
 <body>
 
+    <!-- Header -->
     <div class="header-container fixed-top">
         <header class="header navbar navbar-expand-sm">
             <div class="header-left d-flex">
@@ -44,6 +75,7 @@
         </header>
     </div>
 
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <a href="#"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
         <a href="#"><span class="fas fa-user-graduate"></span> Tutor AI</a>
@@ -51,43 +83,24 @@
         <a href="#"><span class="fas fa-upload"></span> Upload Files</a>
     </div>
 
-    <!--Second Side bar-->
-    <!-- Second Sidebar -->
     <!-- Dropdown Menu for Profile/Notifications -->
     <div class="dropdown-menu" id="dropdown-menu">
         <a href="#"><span class="fas fa-cog"></span> Settings</a>
-        <a href="../profile/profile.php"><span class="fas fa-user"></span> Profile</a>
-        <a href="../lib/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
+        <a href="#"><span class="fas fa-user"></span> Profile</a>
+        <a href="logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
     </div>
 
-
-
-
-    <div class="main-content" id="main-content">
-        <div class="main-content" id="main-content">
-            <h2>Welcome to BMCC Companion</h2>
-            <p>Your dashboard for support and resources.</p>
-            <!-- College News Section -->
-            <div class="container mt-5" style="line-height: 70px;">
-                <h2>College News</h2>
-                <div class="news-section">
-                    <article class="news-item">
-                        <h4>News Article Title 1</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel odio euismod, fermentum
-                            odio vitae, auctor nulla. <a href="#">Read More</a></p>
-                    </article>
-                    <article class="news-item">
-                        <h4>News Article Title 2</h4>
-                        <p>Curabitur non arcu vitae elit laoreet ultricies. Sed at risus vitae libero bibendum commodo.
-                            <a href="#">Read More</a></p>
-                    </article>
-                    <article class="news-item">
-                        <h4>News Article Title 3</h4>
-                        <p>Sed hendrerit nisi sit amet libero commodo, in auctor massa feugiat. Vivamus sit amet ante ut
-                            quam pulvinar tincidunt. <a href="#">Read More</a></p>
-                    </article>
-                    <!-- Add more news articles as needed -->
-                </div>
+    <!-- User Profile Content -->
+    <div class="container mt-5 pt-5">
+        <h2>User Profile</h2>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></h5>
+                <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+                <p class="card-text"><strong>GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
+                <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
+                <p class="card-text"><strong>Account Created:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
+                <a href="logout.php" class="btn btn-secondary mt-3">Logout</a>
             </div>
         </div>
     </div>
@@ -102,14 +115,11 @@
             });
         });
 
-
-        //second side bar
-
         document.querySelector(".fa-user-circle").addEventListener("click", function (event) {
             event.stopPropagation();
             document.getElementById("dropdown-menu").style.display = "block";
         });
-        // Close the dropdown when clicking outside of it
+
         document.addEventListener("click", function () {
             document.getElementById("dropdown-menu").style.display = "none";
         });
@@ -117,3 +127,7 @@
 </body>
 
 </html>
+
+<?php
+$connection->close();
+?>
