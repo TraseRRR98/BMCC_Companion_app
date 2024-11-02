@@ -110,6 +110,7 @@ $connection->close();
         <a href="../tutor/tutor.html"><span class="fas fa-user-graduate"></span> Tutor AI</a>
         <a href="#"><span class="fas fa-ban"></span> Spam Detector</a>
         <a href="../files/uploader.php"><span class="fas fa-upload"></span> Upload Files</a>
+        <a href="#"><span class="fas fa-calendar-alt"></span> Calendar</a>  
     </div>
 
     <!-- Dropdown Menu for Profile/Notifications -->
