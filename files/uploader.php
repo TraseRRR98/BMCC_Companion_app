@@ -247,7 +247,7 @@ $connection->close();
         }
 
         // Example: Replace "Guest" with the actual user's name
-        const loggedInUserName = "John Doe"; // Replace this with backend data
+        const loggedInUserName = "Bryan Tikhonov"; // Replace this with backend data
         updateUserName(loggedInUserName);
     </script>
 </body>
