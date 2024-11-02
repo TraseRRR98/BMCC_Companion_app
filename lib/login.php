@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_PO
             $_SESSION['user_id'] = $user['user_id'];
 
             // Redirect to control panel
-            header("Location: ../control_panel/control_panel.html");
+            header("Location: ../control_panel/control_panel.php");
             exit;
         } else {
             $error = "Invalid password.";
