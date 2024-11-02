@@ -1,55 +1,47 @@
 # BMCC_Companion_app
-CS project for AI Innovation challenge
-We believe that all students, traditional or non-traditional deserve to have an enjoyable experience when engaging in their academic affairs. Although being a college student may be difficult at times, we hope our Companion application lessens the burden college may ‘seem’ to be. By creating a hub for students to get help in classes, get connected with events and opportunities, and outside resources.
-Through an AI chatbot to students will be able to test their knowledge and to better aid their learning. Also by providing a mental health chat box that help students handle the stresses that higher academia may have.
+BMCC_Companion_app
+CS Project for the AI Innovation Challenge
 
-<<<<<<< HEAD
-folder control_panel
-    --control_panel.php - This is the home page where users can access to different features.
+Overview
+The BMCC Companion App aims to enhance the college experience for all students by providing a central hub where they can access academic resources, connect with events and opportunities, and utilize additional tools to support their journey. Being a college student is challenging, and we hope our Companion App eases the load by providing meaningful support.
 
-Technology Implemented
-The technology implemented for the landing page is:
-    -PHP (For server side scripting.)
-    -Java script (For interactivity.)
-    -Html/Css (For the structure and the styling.)
-
-------------------------------------
-
-    Installation Instructions
-Steps to Install and Run the Application
-
-Download and Install XAMPP:
-
+Key Features:
+AI Chatbot: An AI-powered chatbot for students to test their knowledge, gain feedback, and improve their learning.
+Mental Health Support: A dedicated mental health chat feature to help students manage stress and challenges associated with academic life.
+Folder Structure
+control_panel
+control_panel.php: This is the home page where users can access various features of the application.
+tutor
+The tutoring component guides students through problem-solving processes instead of providing direct answers. By leveraging input from the user, it offers recommendations for study resources and strategies.
+Utilizes Bootstrap CSS to ensure a responsive design across devices.
+Includes jQuery commands for dynamic user experience and tailored study outlines.
+profile
+Contains the main profile page, displaying relevant student information in a read-only format. Connected to MySQL to fetch and present necessary details.
+mente
+Houses the AI chatbot, "Mente+." Currently under development, this component is open for contributions to improve its guidance, logic-based responses, and adaptability.
+Technology Stack
+PHP: Server-side scripting.
+JavaScript: For interactivity and front-end logic.
+HTML/CSS: For structure and styling.
+Bootstrap: To ensure a responsive layout.
+MySQL: Database management.
+Installation Instructions
+Step 1: Download and Install XAMPP
 Download XAMPP from the official website and install it on your local machine.
-Setup the Database:
-
-Start XAMPP and run the Apache and MySQL modules.
-Open phpMyAdmin (http://localhost/phpmyadmin) and create a new database named bmcc_student_companion.
-Import the SQL script (if available) to create the necessary tables.
-Clone the Repository:
-
-Clone the repository to your local machine using the following command:
+Step 2: Set Up the Database
+Start XAMPP and activate the Apache and MySQL modules.
+Open phpMyAdmin and create a new database named bmcc_student_companion.
+Import the provided SQL script (if available) to set up the required tables.
+Step 3: Clone the Repository
+Clone the repository to your local machine using:
 bash
 Copy code
 git clone <repository-url>
-Place Files in the Correct Directory:
-
-Move the cloned project folder to the htdocs directory of your XAMPP installation, typically located at C:\xampp\htdocs.
-Access the Application:
-
+Step 4: Place Files in the Correct Directory
+Move the cloned project folder to the htdocs directory of your XAMPP installation (typically found at C:\xampp\htdocs).
+Step 5: Access the Application
 Open your web browser and navigate to http://localhost/BMCC_Companion_app/lib/login.php to view the login page.
-Login with Your Credentials:
-
-Use the credentials of a user stored in your database to log in and access the control panel.
-=======
-Folder tutor
-- We then tackle tutoring because although there are resources out there like chat gpt and student resource tutoring. Our application will not give answers to academic questions, it will instead offer guidance and logic to an answer. Offering the student the most efficient way of getting an answer.
-- With certain inputs we would get recommended study advice from our chatbot
-- In the front end of the application we are bootstrap.css to format our webpage according to the type of device input a user is running
-- followed by some Jquery command to get the recommended outline. 
->>>>>>> 010c1cfc77a039932beee2e22ac4087f4af9219d
-Folder profile
->>>>>>> Main profile page file where all neccessary information is presented. Conntected to mysql and serve as informational page(read only)
->>>>>>> 
-
-
+Step 6: Login
+Use the credentials stored in your database to log in and access the control panel.
+Contribution
+You can contribute to the development of this application by providing feedback and suggestions in ISSUESFEEDBACK.md
