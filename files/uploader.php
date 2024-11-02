@@ -105,9 +105,9 @@ $connection->close();
 
     <!-- Sidebar -->
     <div class="sidebar show" id="sidebar">
-        <a href = "../control_panel/control_panel.html"><span class="fas fa-tachometer-alt"></span> Dashboard</a>
+        <a href = "../control_panel/control_panel.php"><span class="fas fa-tachometer-alt"></span> Dashboard</a>
         <a href="../mente/mente.html"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
-        <a href="#"><span class="fas fa-user-graduate"></span> Tutor AI</a>
+        <a href="../tutor/tutor.html"><span class="fas fa-user-graduate"></span> Tutor AI</a>
         <a href="#"><span class="fas fa-ban"></span> Spam Detector</a>
         <a href="../files/uploader.php"><span class="fas fa-upload"></span> Upload Files</a>
     </div>
