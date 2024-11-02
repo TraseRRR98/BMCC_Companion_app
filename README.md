@@ -14,14 +14,17 @@ The **BMCC Companion App** aims to enhance the college experience for all studen
 - **control_panel.php**: This is the home page where users can access various features of the application.
 
 ### `tutor`
+- tutor.html 
 - The tutoring component guides students through problem-solving processes instead of providing direct answers. By leveraging input from the user, it offers recommendations for study resources and strategies.
 - Utilizes Bootstrap CSS to ensure a responsive design across devices.
 - Includes jQuery commands for dynamic user experience and tailored study outlines.
 
 ### `profile`
+- profile.php 
 - Contains the main profile page, displaying relevant student information in a read-only format. Connected to MySQL to fetch and present necessary details.
 
 ### `mente`
+- mente.html
 - Houses the AI chatbot, "Mente+." Currently under development, this component is open for contributions to improve its guidance, logic-based responses, and adaptability.
 
 ## Technology Stack
