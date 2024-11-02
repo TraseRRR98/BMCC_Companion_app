@@ -44,7 +44,6 @@ $connection->close();
 </head>
 
 <body>
-
     <div class="header-container fixed-top">
         <header class="header navbar navbar-expand-sm">
             <div class="header-left d-flex">

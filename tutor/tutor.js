@@ -51,23 +51,22 @@ function displayMessage(message, sender) {
 
 // Get Bot Response based on user input
 function getBotResponse(userInput) {
-    // Convert input to lowercase for case-insensitive matching
-    const input = userInput.toLowerCase();
+    const input = userInput.toLowerCase().trim();
 
-    // Check for mental health-related prompts and responses
-    if (input.includes("What are linked lists?")) {
+    // Use regular expressions for more flexible matching
+    if (/linked\s*lists?/.test(input)) {
         return "A linked list is a data structure used in computer science to store a sequence of elements, where each element (called a node) contains data and a reference (or link) to the next node in the sequence. Linked lists are particularly useful for applications where you need dynamic memory allocation, as they allow you to easily insert or delete elements without rearranging the entire structure.";
-    } else if (input.includes("hello")) {
+    } else if (/hello/.test(input)) {
         return "Hello there, I am your school personal assistant";
-    } else if (input.includes("what can you do?")) {
+    } else if (/what\s*can\s*you\s*do\??/.test(input)) {
         return "Hello there, I am your school personal assistant. I can assist you in creating study guides, provided teacher information, and other school resources";
-    }else if (input.includes("When is CSC 215 (9AM) TA tutoring hour?")) {
-        return "Tutoring for CSC 215, occurs both tuesdays and thursdays at 12:15pm - 1:30pm in room F1008-o";
-    } else if (input.includes("Can i get some integral problems")) {
-        return "whats the indefinite integral of 3x^3+6";
-    } else if (input.includes("whats the best way to become proficient in math")) {
+    } else if (/csc\s*215.*tutoring\s*hour/.test(input)) {
+        return "Tutoring for CSC 215 occurs both Tuesdays and Thursdays at 12:15 PM - 1:30 PM in room F1008-o";
+    } else if (/integral\s*problems/.test(input)) {
+        return "Here's a challenge: What's the indefinite integral of 3x^3 + 6?";
+    } else if (/proficient\s*in\s*math/.test(input)) {
         return "Conceptual Understanding Over Memorization: Memorizing formulas and steps can be helpful for exams, but without understanding the reasoning behind them, they’re easy to forget and hard to apply creatively. When you focus on why a rule works, you’re better prepared to adapt it to different scenarios.";
-    } else if (input.includes("what is linear in big-o")) {
+    } else if (/linear\s*in\s*big-o/.test(input)) {
         return "Proportional Growth: If the input size doubles, the running time approximately doubles as well.";
     } else {
         // Default response if no keywords match
