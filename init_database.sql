@@ -86,17 +86,7 @@ INSERT INTO `courses` (`course_id`, `course_name`, `course_code`, `instructor_na
 
 INSERT INTO users (first_name, last_name, email, password, role, gpa, major, created_at) 
 VALUES 
-('John', 'Doe', 'johndoe@example.com', 'hashed_password', 'student', 3.5, CS, '2024-11-01 19:43:49');
-
-INSERT INTO course_enrollment (user_id, course_id, enrollment_date) 
-VALUES 
-(1, 2, NOW()),  -- CSC211
-(1, 3, NOW());  -- CSC215
-(1, 1, '2023-02-01'),  -- CSC101
-(1, 6, '2023-02-01'),  -- MAT301
-(1, 7, '2023-09-01'),  -- MAT302
-(1, 8, '2023-09-01');  -- PHY215
-
+('John', 'Doe', 'johndoe@example.com', 'hashed_password', 'student', 3.5, 'CS', '2024-11-01 19:43:49');
 
 -- Add additional courses
 INSERT INTO courses (course_name, course_code, instructor_name, semester, description, created_at) VALUES
@@ -108,6 +98,14 @@ INSERT INTO courses (course_name, course_code, instructor_name, semester, descri
 ('Information Systems', 'CIS345', 'Ada Lovelace', 'Spring 2024', 'Overview of information systems and their role in business operations, data management, and systems analysis.', '2024-11-01 19:43:49'),
 ('Introduction to Statistics', 'MAT206', 'Florence Nightingale', 'Fall 2023', 'Foundational concepts of statistics, covering probability, distributions, and hypothesis testing.', '2024-11-01 19:43:49');
 
+INSERT INTO course_enrollment (user_id, course_id, enrollment_date) 
+VALUES 
+(1, 2, NOW()),  -- CSC211
+(1, 3, NOW()),  -- CSC215
+(1, 1, '2023-02-01'),  -- CSC101
+(1, 6, '2023-02-01'),  -- MAT301
+(1, 7, '2023-09-01'),  -- MAT302
+(1, 8, '2023-09-01');  -- PHY215
 
 -- Insert grades for courses (example entries)
 INSERT INTO grades (user_id, course_id, grade, grade_points, semester, date_awarded)
