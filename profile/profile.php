@@ -8,21 +8,34 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
 
-// Fetch user information
-$sql = "SELECT first_name, last_name, email, gpa, major, role, created_at FROM users WHERE user_id = ?";
-$stmt = $connection->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
 
-if ($result->num_rows == 1) {
-    $user = $result->fetch_assoc();
+    $sql = "SELECT first_name, last_name, email, gpa, major, role, created_at FROM users WHERE user_id = ?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Set user's name and details if found in the database
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $user_name = $user['first_name'] . ' ' . $user['last_name'];
+    } else {
+        $user_name = "Guest"; // Fallback if user not found
+        $user = [  // Default values for missing user data
+            'email' => 'N/A',
+            'gpa' => 'N/A',
+            'role' => 'N/A',
+            'major' => 'N/A'
+        ];
+    }
+
+    $stmt->close();
 } else {
-    echo "User not found.";
-    exit;
+    $user_name = "Guest"; // Default if not logged in
 }
 
 // Fetch grades with course codes for enrolled courses for the logged-in user
@@ -129,7 +142,8 @@ $connection->close();
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-white">
-                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i> <!-- Profile Icon -->
+                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i>
+                        <span id="user-name" class="ml-2" style="margin-left: 10px;"><?php echo htmlspecialchars($user_name); ?></span>
                     </a>
                 </li>
             </ul>
@@ -195,10 +209,9 @@ $connection->close();
         <h2 class="mt-3">User Profile</h2>
         <div class="card mt-4">
             <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></h5>
                 <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p class="card-text"><strong>Current GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
-                <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
+                <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'] ?? 'N/A')); ?></p>
                 <p class="card-text"><strong>Major:</strong> <?php echo htmlspecialchars($user['major'] ?? 'N/A'); ?></p>
             </div>
         </div>
