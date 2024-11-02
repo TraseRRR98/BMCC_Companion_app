@@ -25,6 +25,29 @@ if ($result->num_rows == 1) {
     exit;
 }
 
+// Fetch grades for enrolled courses for the logged-in user
+$gradesQuery = "
+    SELECT courses.course_name, grades.grade, grades.grade_points 
+    FROM grades 
+    JOIN courses ON grades.course_id = courses.course_id 
+    WHERE grades.user_id = ?";
+$stmt = $connection->prepare($gradesQuery);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$gradesResult = $stmt->get_result();
+$gradesData = $gradesResult->fetch_all(MYSQLI_ASSOC);
+
+// Encode grades data for use in JavaScript
+$gradesChartData = [];
+foreach ($gradesData as $grade) {
+    $gradesChartData[] = [
+        'course_name' => $grade['course_name'],
+        'grade' => $grade['grade'],
+        'grade_points' => $grade['grade_points']
+    ];
+}
+$gradesChartData = json_encode($gradesChartData);
+
 $stmt->close();
 
 // Fetch course counts for online vs in-person specific to the logged-in user
@@ -116,10 +139,18 @@ $connection->close();
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <a href = "../control_panel/control_panel.html"><span class="fas fa-tachometer-alt"></span> Dashboard</a>
-        <a href="#"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
+        <a href="../mente/mente.html"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
         <a href="#"><span class="fas fa-user-graduate"></span> Tutor AI</a>
         <a href="#"><span class="fas fa-ban"></span> Spam Detector</a>
         <a href="#"><span class="fas fa-upload"></span> Upload Files</a>
+    </div>
+
+    <!-- Second Sidebar -->
+    <!-- Dropdown Menu for Profile/Notifications -->
+    <div class="dropdown-menu" id="dropdown-menu">
+        <a href="#"><span class="fas fa-cog"></span> Settings</a>
+        <a href="../profile/profile.php"><span class="fas fa-user"></span> Profile</a>
+        <a href="../lib/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
     </div>
 
     <!-- Dropdown Menu for Notifications -->
@@ -166,16 +197,26 @@ $connection->close();
             <div class="card-body">
                 <h5 class="card-title"><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></h5>
                 <p class="card-text"><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-                <p class="card-text"><strong>GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
+                <p class="card-text"><strong>Current GPA:</strong> <?php echo htmlspecialchars($user['gpa'] ?? 'N/A'); ?></p>
                 <p class="card-text"><strong>Role:</strong> <?php echo ucfirst(htmlspecialchars($user['role'])); ?></p>
                 <p class="card-text"><strong>Major:</strong> <?php echo htmlspecialchars($user['major'] ?? 'N/A'); ?></p>
             </div>
         </div>
 
-        <!-- Donut Chart for Course Format Distribution -->
         <div class="container mt-5">
-            <h4>Course Format Distribution</h4>
-            <canvas id="courseChart" class="small-chart"></canvas>
+            <div class="row">
+                <!-- Donut Chart for Course Format Distribution -->
+                <div class="col-md-6">
+                    <h4>Course Format Distribution</h4>
+                    <canvas id="courseChart" width="300" height="300"></canvas>
+                </div>
+
+                <!-- Grades Histogram -->
+                <div class="col-md-6">
+                    <h4>Grades Histogram</h4>
+                    <canvas id="gradesChart" width="400" height="400"></canvas>
+                </div>
+            </div>
         </div>
 
         <!-- Enrolled Courses Table -->
@@ -258,6 +299,55 @@ $connection->close();
                 }
             }
         });
+
+// Data for the grades histogram from PHP
+const gradesData = <?php echo $gradesChartData; ?>;
+
+// Prepare data for the histogram chart
+const courseNames = gradesData.map(grade => grade.course_name);
+const gradePoints = gradesData.map(grade => grade.grade_points);
+
+const gradesCtx = document.getElementById('gradesChart').getContext('2d');
+const gradesChart = new Chart(gradesCtx, {
+    type: 'bar',
+    data: {
+        labels: courseNames,
+        datasets: [{
+            label: 'Grade Points',
+            data: gradePoints,
+            backgroundColor: '#FF9F40',
+            hoverBackgroundColor: '#FF9F40'
+        }]
+    },
+    options: {
+        responsive: false,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return tooltipItem.label + ': ' + tooltipItem.raw;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 4.0
+            }
+        }
+    }
+});
+
+          // Toggle dropdown for Profile icon
+document.querySelector(".fa-user-circle").addEventListener("click", function(event) {
+    event.stopPropagation();
+    document.getElementById("dropdown-menu").style.display = "block";
+});
 
         // Toggle dropdown for Notification icon
 document.querySelector(".fa-bell").addEventListener("click", function(event) {
