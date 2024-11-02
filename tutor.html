@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente+ - Your AI-Powered Mental Health Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css"> <!-- Custom CSS -->
+    <link rel="stylesheet" href="../tutor/assets/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm">
+            <div class="header-left d-flex">
+                <a href="#" class="sidebarCollapse" data-toggle="collapse" aria-expanded="false"
+                    style="margin-right: 30px;">
+                    <span class="fas fa-bars text-white" style="font-size: 1.5em;"></span>
+                </a>
+
+                <div class="logo text-white" style="margin-right: 40px;">
+                    BMCC Companion
+                </div>
+            </div>
+            <ul class="navbar-item flex-row ml-auto" style="list-style: none; margin-left: auto; display: flex;">
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="fas fa-bell" style="font-size: 1.5em;"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="fas fa-envelope" style="font-size: 1.5em;"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i> <!-- Profile Icon -->
+                    </a>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--Side bar-->
+    <div class="sidebar show" id="sidebar">
+        <a href="../control_panel/control_panel.html"><span class="fas fa-tachometer-alt"></span> Dashboard</a>
+        <a href="../mente/mente.html"><span class="fas fa-comment-alt"></span> Mental Health Chatbot</a>
+        <a href="#"><span class="fas fa-user-graduate"></span> Tutor AI</a>
+        <a href="#"><span class="fas fa-ban"></span> Spam Detector</a>
+        <a href="#"><span class="fas fa-upload"></span> Upload Files</a>
+    </div>
+
+    <!-- Second Sidebar -->
+    <!-- Dropdown Menu for Profile/Notifications -->
+    <div class="dropdown-menu" id="dropdown-menu">
+        <a href="#"><span class="fas fa-cog"></span> Settings</a>
+        <a href="../profile/profile.php"><span class="fas fa-user"></span> Profile</a>
+        <a href="../lib/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
+    </div>
+
+    <!-- Dropdown Menu for Notifications -->
+    <div class="dropdown-menu" id="notification-menu" style="width: 300px;">
+        <div class="dropdown-header">Notifications</div>
+        <a href="#" class="dropdown-item">
+            <i class="fas fa-exclamation-circle"></i> New assignment due tomorrow
+        </a>
+        <a href="#" class="dropdown-item">
+            <i class="fas fa-calendar-alt"></i> Upcoming event: Workshop at 3 PM
+        </a>
+        <a href="#" class="dropdown-item">
+            <i class="fas fa-info-circle"></i> Campus safety alert issued
+        </a>
+        <a href="#" class="dropdown-item text-center" style="font-weight: bold;">
+            View All Notifications
+        </a>
+    </div>
+
+    <!-- Dropdown Menu for Email -->
+    <div class="dropdown-menu" id="email-menu" style="width: 400px;">
+        <div class="dropdown-header">Messages</div>
+        <a href="#" class="dropdown-item">
+            <strong>Professor Smith:</strong> Remember to review...
+            <span class="text-muted">10 mins ago</span>
+        </a>
+        <a href="#" class="dropdown-item">
+            <strong>Career Services:</strong> Upcoming internship fair...
+            <span class="text-muted">1 hr ago</span>
+        </a>
+        <a href="#" class="dropdown-item">
+            <strong>BMCC Alerts:</strong> Important campus update...
+            <span class="text-muted">2 hrs ago</span>
+        </a>
+        <a href="#" class="dropdown-item text-center" style="font-weight: bold;">
+            View All Messages
+        </a>
+    </div>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to BMCC TUTOR AI+</h2>
+            <p>Welcome to BMCC TUTOR AI+</p>
+        </div>
+    </section>
+
+    <!-- Centered Chatbot Window Section -->
+    <section class="chatbot-section">
+        <div id="chatbot-window">
+            <div id="chatbot-header">
+                <span>Mente Tutor+</span>
+                <button onclick="toggleChat()">✖</button>
+            </div>
+            <div id="chatbox">
+                <!-- Messages will appear here -->
+            </div>
+            <form id="chatForm" onsubmit="return sendMessage()">
+                <input type="text" id="userInput" name="userInput" placeholder="Type your message..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h3>About Mente+</h3>
+        <p>Mente+ is here to provide compassionate, confidential, and convenient mental health support anytime you need
+            it.</p>
+        <p>Our mission is to make mental health support accessible, personalized, and stigma-free for all students.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h3>Features</h3>
+        <ul>
+            <li><strong>Real-Time Emotional Support</strong>: Mente+ listens and responds to you with empathy.</li>
+            <li><strong>Guided Exercises</strong>: Access mindfulness practices, stress management techniques, and more.
+            </li>
+            <li><strong>Resource Recommendations</strong>: Connects you to BMCC counseling services and wellness
+                resources.</li>
+            <li><strong>Mood Tracking</strong>: Monitor your emotions over time and gain insights into your mental
+                well-being.</li>
+        </ul>
+        <a href="features.html" class="feature-link">Learn More About Our Features</a>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <h3>Resources</h3>
+        <ul>
+            <li><a href="#">On-Campus Counseling</a></li>
+            <li><a href="#">24/7 Crisis Helpline</a></li>
+            <li><a href="#">Mental Health Workshops</a></li>
+            <li><a href="#">Self-Help Library</a></li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>Contact us: <a href="mailto:contact@menteplus.com">contact@menteplus.com</a></p>
+        <p>&copy; 2024 Mente+ | All rights reserved.</p>
+    </footer>
+
+    <script src="tutor.js"></script>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".sidebarCollapse").click(function () {
+                $("#sidebar").toggleClass("show");
+                $("#main-content").toggleClass("shift");
+            });
+        });
+
+
+        //second side bar
+
+        // Toggle dropdown for Profile icon
+        document.querySelector(".fa-user-circle").addEventListener("click", function (event) {
+            event.stopPropagation();
+            document.getElementById("dropdown-menu").style.display = "block";
+        });
+
+        // Toggle dropdown for Notification icon
+        document.querySelector(".fa-bell").addEventListener("click", function (event) {
+            event.stopPropagation();
+            // Close any open dropdowns first
+            document.getElementById("email-menu").style.display = "none"; // Close email menu if open
+            const notificationMenu = document.getElementById("notification-menu");
+            notificationMenu.style.display = (notificationMenu.style.display === "block") ? "none" : "block";
+        });
+
+        // Toggle dropdown for Email icon
+        document.querySelector(".fa-envelope").addEventListener("click", function (event) {
+            event.stopPropagation();
+            // Close any open dropdowns first
+            document.getElementById("notification-menu").style.display = "none"; // Close notification menu if open
+            const emailMenu = document.getElementById("email-menu");
+            emailMenu.style.display = (emailMenu.style.display === "block") ? "none" : "block";
+        });
+
+        // Close all dropdowns when clicking outside
+        document.addEventListener("click", function () {
+            document.getElementById("dropdown-menu").style.display = "none";
+            document.getElementById("notification-menu").style.display = "none";
+            document.getElementById("email-menu").style.display = "none";
+        });
+
+    </script>
+</body>
+
+</html>
