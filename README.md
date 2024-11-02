@@ -48,3 +48,8 @@ Folder tutor
 - In the front end of the application we are bootstrap.css to format our webpage according to the type of device input a user is running
 - followed by some Jquery command to get the recommended outline. 
 >>>>>>> 010c1cfc77a039932beee2e22ac4087f4af9219d
+Folder profile
+>>>>>>> Main profile page file where all neccessary information is presented. Conntected to mysql and serve as informational page(read only)
+>>>>>>> 
+
+
