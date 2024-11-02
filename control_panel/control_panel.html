@@ -38,7 +38,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-white">
-                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i> <!-- Profile Icon -->
+                        <i class="fas fa-user-circle" style="font-size: 1.5em;"></i>
+                        <span id="user-name" class="ml-2" style="margin-left: 10px;">Guest</span> <!-- Placeholder for user name -->
                     </a>
                 </li>
             </ul>
@@ -193,6 +194,18 @@ document.addEventListener("click", function() {
     document.getElementById("email-menu").style.display = "none";
 });
 
+
+
+// Function to update the user name in the navbar
+function updateUserName(userName) {
+        if (userName) {
+            document.getElementById("user-name").textContent = userName;
+        }
+    }
+
+    // Example: Replace "Guest" with the actual user's name
+    const loggedInUserName = "John Doe"; // Replace this with your backend data
+    updateUserName(loggedInUserName);
 
 
     </script>
