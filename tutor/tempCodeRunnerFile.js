@@ -1,1 +1,0 @@
-else if (input.includes("When is CSC 215 (9AM) TA tutoring hour?"))
