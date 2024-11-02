@@ -122,6 +122,14 @@ $connection->close();
         <a href="#"><span class="fas fa-upload"></span> Upload Files</a>
     </div>
 
+    <!-- Second Sidebar -->
+    <!-- Dropdown Menu for Profile/Notifications -->
+    <div class="dropdown-menu" id="dropdown-menu">
+        <a href="#"><span class="fas fa-cog"></span> Settings</a>
+        <a href="../profile/profile.php"><span class="fas fa-user"></span> Profile</a>
+        <a href="../lib/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
+    </div>
+
     <!-- Dropdown Menu for Notifications -->
 <div class="dropdown-menu" id="notification-menu" style="width: 300px;">
     <div class="dropdown-header">Notifications</div>
@@ -258,6 +266,13 @@ $connection->close();
                 }
             }
         });
+
+
+          // Toggle dropdown for Profile icon
+document.querySelector(".fa-user-circle").addEventListener("click", function(event) {
+    event.stopPropagation();
+    document.getElementById("dropdown-menu").style.display = "block";
+});
 
         // Toggle dropdown for Notification icon
 document.querySelector(".fa-bell").addEventListener("click", function(event) {
