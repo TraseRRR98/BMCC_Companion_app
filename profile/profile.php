@@ -25,9 +25,9 @@ if ($result->num_rows == 1) {
     exit;
 }
 
-// Fetch grades for enrolled courses for the logged-in user
+// Fetch grades with course codes for enrolled courses for the logged-in user
 $gradesQuery = "
-    SELECT courses.course_name, grades.grade, grades.grade_points 
+    SELECT courses.course_code, grades.grade, grades.grade_points 
     FROM grades 
     JOIN courses ON grades.course_id = courses.course_id 
     WHERE grades.user_id = ?";
@@ -41,7 +41,7 @@ $gradesData = $gradesResult->fetch_all(MYSQLI_ASSOC);
 $gradesChartData = [];
 foreach ($gradesData as $grade) {
     $gradesChartData[] = [
-        'course_name' => $grade['course_name'],
+        'course_code' => $grade['course_code'],
         'grade' => $grade['grade'],
         'grade_points' => $grade['grade_points']
     ];
@@ -300,18 +300,17 @@ $connection->close();
             }
         });
 
-// Data for the grades histogram from PHP
-const gradesData = <?php echo $gradesChartData; ?>;
+        const gradesData = <?php echo $gradesChartData; ?>;
 
-// Prepare data for the histogram chart
-const courseNames = gradesData.map(grade => grade.course_name);
+// Prepare data for the histogram chart using course codes
+const courseCodes = gradesData.map(grade => grade.course_code);
 const gradePoints = gradesData.map(grade => grade.grade_points);
 
 const gradesCtx = document.getElementById('gradesChart').getContext('2d');
 const gradesChart = new Chart(gradesCtx, {
     type: 'bar',
     data: {
-        labels: courseNames,
+        labels: courseCodes,  // Use course codes instead of names
         datasets: [{
             label: 'Grade Points',
             data: gradePoints,
@@ -321,7 +320,7 @@ const gradesChart = new Chart(gradesCtx, {
     },
     options: {
         responsive: false,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: false
@@ -335,9 +334,24 @@ const gradesChart = new Chart(gradesCtx, {
             }
         },
         scales: {
+            x: {
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 45,
+                    minRotation: 45,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
             y: {
                 beginAtZero: true,
-                max: 4.0
+                max: 4.0,
+                ticks: {
+                    font: {
+                        size: 14
+                    }
+                }
             }
         }
     }
